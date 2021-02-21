@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+function main {
+  ifconfig utun2 | grep 'inet ' | awk '{print $2}'
+}
+
+main "$@"
