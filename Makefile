@@ -20,8 +20,11 @@ nomad.conf: # Generate nomad.conf
 	cat $(INPUT) | sed 's#x.x.x.x#$(shell bin/my-ip)#' > nomad.conf.1
 	mv -f nomad.conf.1 nomad.conf
 
-job-docker: # Subit nomad docker job
+job-docker: # Submit nomad docker job
 	set -a source .env && env VAULT_TOKEN="$$(pass-vault-helper get)" nomad job run docker.nomad
 
-job-raw-exec: # Subit nomad rawe_xec job
+job-raw-exec: # Submit nomad rawe_xec job
 	set -a source .env && env VAULT_TOKEN="$$(pass-vault-helper get)" nomad job run raw_exec.nomad
+
+screen: # Run nomad in a screen
+	screen -DRR yurt -m bash -c 'env VAULT_TOKEN=$$(pass $(pass)) make nomad'
