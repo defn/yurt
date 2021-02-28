@@ -1,4 +1,4 @@
-job "ubuntu" {
+job "docker" {
   datacenters = ["spiral"]
 
   group "shell" {
