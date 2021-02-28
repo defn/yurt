@@ -1,7 +1,7 @@
 job "ubuntu" {
   datacenters = ["spiral"]
 
-  group "example" {
+  group "shell" {
     task "server" {
       driver = "docker"
 
