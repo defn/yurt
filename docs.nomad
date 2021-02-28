@@ -10,13 +10,11 @@ job "docs" {
       }
 
       config {
-        image = "hashicorp/http-echo"
+        image = "ubuntu"
 
         args = [
-          "-listen",
-          ":5678",
-          "-text",
-          "hello world",
+          "sleep",
+          "86400"
         ]
       }
 
@@ -26,13 +24,7 @@ job "docs" {
 HELLO={{.Data.data.HELLO}}
 {{ end }}
 EOF
-        destination = "secrets.txt"
-      }
-    }
-
-    network {
-      port "http" {
-        static = "5678"
+        destination = "secrets/secrets.txt"
       }
     }
   }
