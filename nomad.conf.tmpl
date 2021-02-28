@@ -1,5 +1,3 @@
-data_dir = "/Users/defn/work/nomad/mnt/nomad"
-
 server {
   enabled = true
 }
@@ -12,10 +10,6 @@ consul {
     "traefik.http.routers.nomad.rule=HostRegexp(`nomad.{domain:.+}`)" ]
 }
 
-datacenter = "jojo.defn.in"
-
-region = "defn.in"
-
 advertise {
   http = "x.x.x.x"
   rpc = "x.x.x.x"
@@ -26,4 +20,9 @@ vault {
   enabled               = true
   address               = "http://localhost:8200"
   allow_unauthenticated = false
+}
+
+client {
+  enabled = true
+  servers = ["x.x.x.x:4647"]
 }

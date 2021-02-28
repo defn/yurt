@@ -5,13 +5,16 @@ SHELL := /bin/bash
 menu:
 	@perl -ne 'printf("%20s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' Makefile
 
-nomad-dev: # Run dev server
-	$(MAKE) nomad.conf INPUT=dev.conf.example
-	nomad agent -config=./nomad.conf -consul-checks-use-advertise -bootstrap-expect 1
-
-nomad-server: # Run nomad server
-	$(MAKE) nomad.conf INPUT=server.conf.example
-	nomad agent -config=./nomad.conf -consul-checks-use-advertise -bootstrap-expect 1
+nomad: # Run dev server
+	$(MAKE) nomad.conf INPUT=nomad.conf.tmpl
+	set -a; source .env && nomad agent \
+		-config=./nomad.conf \
+		-data-dir="$(PWD)/mnt/nomad" \
+		-dc="$${NOMAD_DC}" \
+		-region="$${NOMAD_REGION}" \
+		-node="$$(uname -n | cut -d. -f1)" \
+		-consul-checks-use-advertise \
+		-bootstrap-expect 1
 
 nomad.conf: # Generate nomad.conf
 	cat $(INPUT) | sed 's#x.x.x.x#$(shell bin/my-ip)#' > nomad.conf.1

@@ -1,3 +1,5 @@
 etc
 mnt
+.env
 nomad.conf
+nomad.conf.1
