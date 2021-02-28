@@ -7,11 +7,11 @@ menu:
 
 nomad-dev: # Run dev server
 	$(MAKE) nomad.conf INPUT=dev.conf.example
-	nomad agent -config=./nomad.conf -node="$(shell basename $(shell uname -n) .local)" -consul-checks-use-advertise -bootstrap-expect 1
+	nomad agent -config=./nomad.conf -consul-checks-use-advertise -bootstrap-expect 1
 
 nomad-server: # Run nomad server
 	$(MAKE) nomad.conf INPUT=server.conf.example
-	nomad agent -config=./nomad.conf -node="$(shell basename $(shell uname -n) .local)" -consul-checks-use-advertise -bootstrap-expect 1
+	nomad agent -config=./nomad.conf -consul-checks-use-advertise -bootstrap-expect 1
 
 nomad.conf: # Generate nomad.conf
 	cat $(INPUT) | sed 's#x.x.x.x#$(shell bin/my-ip)#' > nomad.conf.1
