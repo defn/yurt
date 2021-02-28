@@ -1,4 +1,4 @@
-job "docs" {
+job "ubuntu" {
   datacenters = ["spiral"]
 
   group "example" {

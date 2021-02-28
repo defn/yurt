@@ -21,4 +21,4 @@ nomad.conf: # Generate nomad.conf
 	mv -f nomad.conf.1 nomad.conf
 
 job: # Subit nomad job
-	set -a source .env && env VAULT_TOKEN="$$(pass-vault-helper get)" nomad job run docs.nomad
+	set -a source .env && env VAULT_TOKEN="$$(pass-vault-helper get)" nomad job run ubuntu.nomad
