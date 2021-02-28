@@ -21,7 +21,9 @@ job "ubuntu" {
       template {
         data = <<EOF
 {{ with secret "kv/defn/hello" }}
-HELLO={{.Data.data.HELLO}}
+{{ range $k, $v := .Data.data -}}
+{{ $k }}={{ $v }}
+{{ end -}}
 {{ end }}
 EOF
         destination = "secrets/secrets.txt"
