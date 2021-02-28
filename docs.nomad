@@ -1,5 +1,5 @@
 job "docs" {
-  datacenters = ["jojo.defn.in"]
+  datacenters = ["spiral"]
 
   group "example" {
     task "server" {

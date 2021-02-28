@@ -20,5 +20,5 @@ nomad.conf: # Generate nomad.conf
 	cat $(INPUT) | sed 's#x.x.x.x#$(shell bin/my-ip)#' > nomad.conf.1
 	mv -f nomad.conf.1 nomad.conf
 
-nomad-demo: # Subit nomad job
-	nomad job run docs.nomad
+job: # Subit nomad job
+	set -a source .env && env VAULT_TOKEN="$$(pass-vault-helper get)" nomad job run docs.nomad
